@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>search results</title>
+    <style>
+    .decor{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* 5 columns */
+        gap: 10px; /* Adjust the gap between boxes */
+        padding: 20px;
+        background-color: #f0f0f0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .recomm {
+        border: 1px solid #000;
+        padding: 10px;
+        box-shadow: 10px 10px 20px 5px rgba(17, 17, 17, 0.1);
+        width: 30%;
+        box-sizing: border-box;
+        text-align: center;
+        min-width: 150px; /* Minimum width of each box */
+        min-height: 100px; /* Minimum height of each box */
+        background-color: #ffffff;
+    }
+    .search-container form {
+            display: flex;
+    }
+    .nav {
+        display: flex;
+        justify-content: center;
+        background-color: #444;
+        padding: 10px;
+     }
+
+    .nav a {
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+    }
+
+    .nav a:hover {
+        background-color: #555;
+    }
+
+    .search-container input[type="search"] {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px 0 0 4px;
+        width : 100%;
+    }
+
+    .search-container button {
+        padding: 10px;
+        font-size: 15px;
+        border: 1px solid #ccc;
+        border-left: none;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 0 4px 4px 0;
+        cursor: pointer;
+    }
+
+    .search-container button:hover {
+        background-color: #45a049;
+    }
+    </style>
+    <script>
+        function clicks(id) {
+            const img = document.getElementById(id);
+            const imgInfo = {
+                id: img.id
+            };
+            const queryString = new URLSearchParams(imgInfo).toString();
+            window.location.href = `/clicked?${queryString}`;
+        }
+    </script>
+</head>
+<body>
+    <div class="nav">
+        <div class="search-container">
+            <form id="search-bar" action="{{ url_for('search') }}" method="POST">
+                <input id="query" type="text" name="query" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+            {% if error %}
+                <p class="error" style="color: rgb(255, 255, 255);">{{ error }}</p>
+            {% endif %}
+        </div>
+        <a href="#" id="home" onclick="clicks(id)" style="cursor: pointer;">Home</a>
+        <a href="#" id="mens" onclick="clicks(id)" style="cursor: pointer;">Men</a>
+        <a href="#" id="women" onclick="clicks(id)" style="cursor: pointer;">Women</a>
+        <a href="#" id="kids" onclick="clicks(id)" style="cursor: pointer;">Kids</a>
+        <a href="#" id="baby" onclick="clicks(id)" style="cursor: pointer;">Baby</a>
+        <a href="#">Contact Us</a>
+    </div>
+    <div>
+        <h1> Results for {{answer}}</h1>
+        <div class="decor">
+        {% for i in results %}
+            <div class="recomm">
+                {{ i[0] }}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

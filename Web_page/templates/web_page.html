@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #c3d8da;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .login-box {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 600px;
+            justify-content: center;
+            align-items: center;
+        }
+        .login-box h2 {
+            text-align: center;
+            color: #000000;
+        }
+        .login-box input[type="text"],
+        .login-box input[type="password"] {
+            width: 98%;
+            padding: 5px;
+            margin: 10px 0;
+            border: 1px solid #a6a6a6;
+            height: 25px;
+            border-radius: 3px;
+        }
+        .login-box input[type="submit"] {
+            width: 100%;
+            padding: 10px 20px;
+            margin: 20;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .login-box input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Project C</h1>
+    </div>
+    <div class="login-box">
+        <h2>Login</h2>
+        {% if error %}
+            <p class="error" style="color: red;">{{ error }}</p>
+        {% endif %}
+        <form id = "loginFrom" action="{{ url_for('log') }}" method="POST">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+        </form>
+        <p class="error" id="errorMessage" style="display: none;"></p>
+    </div>
+</body>
+</html>
