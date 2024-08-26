@@ -6,11 +6,11 @@ app = Flask(__name__)
 
 def create_connection():
     conn = psycopg2.connect(
-        dbname="DMQL_Project",  
-        user="postgres",       
-        password="Chiru@0217",        
-        host="localhost",       
-        port="5432"          
+        dbname="DMQL_Project",  # change it to your local devide file name
+        user="postgres",       # change it to your local devide file name
+        password="Chiru@0217",     # change it to your local devide file name   
+        host="localhost",      # change it to your local devide file name 
+        port="5432"        # change it to your local devide file name  
     )
     return conn
 
